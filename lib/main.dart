@@ -1,3 +1,4 @@
+import 'package:blockstatemanagement/second_page.dart';
 import 'package:flutter/material.dart';
 import 'package:blockstatemanagement/color_bloc.dart';
 
@@ -10,14 +11,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   ColorBloc bloc = ColorBloc();
+
   @override
-  void dispose(){
+  void dispose() {
     bloc.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -39,25 +41,36 @@ class _MyAppState extends State<MyApp> {
               },
               backgroundColor: Colors.lightBlue,
             ),
+            SizedBox(
+              width: 10,
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => thePage()),
+                );
+              },
+              backgroundColor: Colors.green,
+            ),
           ],
         ),
         appBar: AppBar(
           title: Text("BloC tanpa Library"),
         ),
         body: Center(
-          child: StreamBuilder(
-            stream: bloc.stateStream,
-            initialData: Colors.amber,
-            builder: (context, snapshot){
-              return AnimatedContainer(
-                duration: Duration(milliseconds: 500),
-                width: 100,
-                height: 100,
-                color: snapshot.data,
-              );
-            },
-          )
-        ),
+            child: StreamBuilder(
+          stream: bloc.stateStream,
+          initialData: Colors.amber,
+          builder: (context, snapshot) {
+            return AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              width: 100,
+              height: 100,
+              color: snapshot.data,
+            );
+          },
+        )),
       ),
     );
   }
