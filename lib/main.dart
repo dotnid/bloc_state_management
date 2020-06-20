@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bloc',
-      home: MyApp(),
+      home: MyHomePage(),
     );
   }
 }
@@ -37,6 +37,7 @@ class _MyAppState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             FloatingActionButton(
+              heroTag: "btn1",
               onPressed: () {
                 bloc.eventSink.add(ColorEvent.to_amber);
               },
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyHomePage> {
               width: 10,
             ),
             FloatingActionButton(
+              heroTag: "btn2",
               onPressed: () {
                 bloc.eventSink.add(ColorEvent.to_ligth_blue);
               },
@@ -55,10 +57,11 @@ class _MyAppState extends State<MyHomePage> {
               width: 10,
             ),
             FloatingActionButton(
+              heroTag: "btn3",
               onPressed: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                      return secondPage();
+                      return thePage();
                     }));
               },
               child: Icon(Icons.skip_next),
@@ -67,7 +70,7 @@ class _MyAppState extends State<MyHomePage> {
           ],
         ),
         appBar: AppBar(
-          title: Text("BloC tanpa Library"),
+          title: Text("Stream Controller & Stream Builder"),
         ),
         body: Center(
             child: StreamBuilder(
