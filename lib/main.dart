@@ -2,14 +2,25 @@ import 'package:blockstatemanagement/second_page.dart';
 import 'package:flutter/material.dart';
 import 'package:blockstatemanagement/color_bloc.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
+void main() {
+  runApp(new MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Bloc',
+      home: MyApp(),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyHomePage> {
   ColorBloc bloc = ColorBloc();
 
   @override
@@ -21,7 +32,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -46,11 +56,12 @@ class _MyAppState extends State<MyApp> {
             ),
             FloatingActionButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => thePage()),
-                );
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                      return secondPage();
+                    }));
               },
+              child: Icon(Icons.skip_next),
               backgroundColor: Colors.green,
             ),
           ],

@@ -3,18 +3,6 @@ import 'main.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'color_bloc2.dart';
 
-class thePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider<ColorBloc2>(
-        builder: (context) => ColorBloc2(),
-        child: secondPage(),
-      ),
-    );
-  }
-}
-
 class secondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +21,7 @@ class secondPage extends StatelessWidget {
             width: 10,
           ),
           FloatingActionButton(
-            backgroundColor: Colors.amber,
+            backgroundColor: Colors.lightBlue,
             onPressed: () {
               bloc2.dispatch(ColorEvent2.to_ligth_blue);
             },
@@ -43,16 +31,19 @@ class secondPage extends StatelessWidget {
           ),
           FloatingActionButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyApp()),
-              );
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
+                    return MyApp();
+                  }));
             },
+            child: Icon(Icons.home),
             backgroundColor: Colors.green,
           ),
         ],
       ),
-      appBar: AppBar(title: Text("Second page"),),
+      appBar: AppBar(
+        title: Text("Second page"),
+      ),
       body: Center(
         child: BlocBuilder<ColorBloc2, Color>(
           builder: (context, currentColor) => AnimatedContainer(
